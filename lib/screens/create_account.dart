@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:travel_companion/provider/profile_provider.dart';
 
 class CreateAccount extends StatefulWidget {
   const CreateAccount({super.key});
@@ -8,18 +10,11 @@ class CreateAccount extends StatefulWidget {
 }
 
 class _CreateAccountState extends State<CreateAccount> {
-  TextEditingController emailController = TextEditingController();
-
-  TextEditingController usernameController = TextEditingController();
-
-  TextEditingController passwordController = TextEditingController();
-
-  TextEditingController ageController = TextEditingController();
-
   bool showpass = true;
 
   @override
   Widget build(BuildContext context) {
+    var profile = Provider.of<ProfileProvider>(context, listen: false);
     return Scaffold(
         body: Container(
             width: double.infinity,
@@ -52,7 +47,7 @@ class _CreateAccountState extends State<CreateAccount> {
                       SizedBox(
                         width: 350,
                         child: TextField(
-                          controller: usernameController,
+                          controller: profile.usernameController,
                           decoration: InputDecoration(
                               prefixIconColor: Colors.white,
                               hintText: 'Enter your name',
@@ -75,7 +70,8 @@ class _CreateAccountState extends State<CreateAccount> {
                       SizedBox(
                         width: 350,
                         child: TextField(
-                          controller: emailController,
+                          keyboardType: TextInputType.emailAddress,
+                          controller: profile.emailController,
                           decoration: InputDecoration(
                               prefixIconColor: Colors.white,
                               hintText: 'Enter your gmail',
@@ -98,7 +94,7 @@ class _CreateAccountState extends State<CreateAccount> {
                       SizedBox(
                         width: 350,
                         child: TextField(
-                          controller: passwordController,
+                          controller: profile.passwordController,
                           obscureText: showpass,
                           decoration: InputDecoration(
                               prefixIconColor: Colors.white,
@@ -129,31 +125,18 @@ class _CreateAccountState extends State<CreateAccount> {
                         height: 10,
                       ),
                       //age
-                      SizedBox(
-                        width: 350,
-                        child: TextField(
-                          controller: ageController,
-                          decoration: InputDecoration(
-                              prefixIconColor: Colors.white,
-                              hintText: 'Enter your Age',
-                              prefixIcon: const Icon(Icons.numbers),
-                              enabledBorder: const OutlineInputBorder(
-                                  borderSide: BorderSide(color: Colors.white),
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(20))),
-                              border: OutlineInputBorder(
-                                  borderSide:
-                                      const BorderSide(color: Colors.white),
-                                  borderRadius: BorderRadius.circular(20))),
-                        ),
-                      ),
+
                       const SizedBox(
                         height: 100,
                       ),
                       SizedBox(
                         width: 250,
                         child: ElevatedButton(
-                            onPressed: () {}, child: const Text('Create')),
+                            onPressed: () {
+                              profile.CreateUser(profile.emailController.text,
+                                  profile.passwordController.text, context);
+                            },
+                            child: const Text('Create')),
                       )
                     ],
                   )),

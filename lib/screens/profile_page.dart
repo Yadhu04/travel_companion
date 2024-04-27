@@ -55,10 +55,10 @@ class ProfilePage extends StatelessWidget {
                     const SizedBox(
                       width: 15,
                     ),
-                    const Text(
-                      'Hi,Yadhu',
-                      style:
-                          TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+                    Text(
+                      'Hi,${profile.usernameController.text}',
+                      style: const TextStyle(
+                          fontSize: 30, fontWeight: FontWeight.bold),
                     ),
                   ],
                 ),

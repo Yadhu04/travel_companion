@@ -11,6 +11,7 @@ class InfoCollector extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var details = Provider.of<InfoProvider>(context, listen: false);
+
     return PageView.builder(
       physics: const NeverScrollableScrollPhysics(),
       controller: details.pageController,
@@ -359,21 +360,49 @@ class InfoCollector extends StatelessWidget {
                   Column(
                     children: [
                       Interests(
-                          icon: Icons.account_balance_sharp,
-                          text: 'Historical',
-                          interestsValue: 'historic'),
+                        icon: Icons.account_balance_rounded,
+                        text: 'Historical',
+                        interestsValue: 'historic',
+                        index: 0,
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
                       Interests(
-                          icon: Icons.temple_buddhist,
-                          text: 'Culture',
-                          interestsValue: 'culture')
+                        icon: Icons.temple_buddhist,
+                        text: 'Cultural',
+                        interestsValue: 'cultural',
+                        index: 1,
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Interests(
+                        icon: Icons.apartment_rounded,
+                        text: 'Architecture',
+                        interestsValue: 'architecture',
+                        index: 2,
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Interests(
+                          icon: Icons.nature,
+                          text: 'Natural',
+                          interestsValue: 'natural',
+                          index: 3),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Interests(
+                          icon: Icons.church_rounded,
+                          text: 'Religion',
+                          interestsValue: ' religion',
+                          index: 4)
                     ],
                   )
                 ],
               ),
-            );
-          case 4:
-            return const Center(
-              child: Text('5 Page'),
             );
         }
         return null;

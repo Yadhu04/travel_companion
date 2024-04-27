@@ -7,11 +7,12 @@ class Interests extends StatelessWidget {
       {super.key,
       required this.icon,
       required this.text,
-      required this.interestsValue});
+      required this.interestsValue,
+      required this.index});
   final String text;
   final String interestsValue;
   final IconData icon;
-
+  final int index;
   @override
   Widget build(BuildContext context) {
     var details = Provider.of<InfoProvider>(context, listen: false);
@@ -36,14 +37,18 @@ class Interests extends StatelessWidget {
             ],
           ),
           Switch(
-            value: details.isSelected,
+            value: details.isSelected[index],
             onChanged: (newValue) {
-              details.toogleSwitch();
-              if (newValue == false) {
-                details.intrest.add(interestsValue);
-              } else {
-                details.intrest.remove(interestsValue);
-              }
+              // newValue = details.isSelected[index];
+              details.toogleSwitch(index, interestsValue);
+              // print(newValue);
+              // print("${details.isSelected[index]},$index");
+              // if (newValue == true) {
+              //   details.intrest.add(interestsValue);
+              // }
+              // if (newValue == false) {
+              //   details.intrest.remove(interestsValue);
+              // }
             },
           )
         ],
@@ -51,16 +56,3 @@ class Interests extends StatelessWidget {
     );
   }
 }
-
-                          // Interests(
-                          //     icon: Icons.account_balance_rounded,
-                          //     text: 'Historical',
-                          //     interestsValue: 'historic'),
-                          // Interests(
-                          //     icon: Icons.temple_buddhist,
-                          //     text: 'Cultural',
-                          //     interestsValue: 'cultural'),
-                          // Interests(
-                          //     icon: Icons.apartment_rounded,
-                          //     text: 'Architecture',
-                          //     interestsValue: 'architecture')

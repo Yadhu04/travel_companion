@@ -88,18 +88,18 @@ class Properties {
   String name;
   double dist;
   int rate;
-  String? osm;
+  String wikidata;
   String kinds;
-  String? wikidata;
+  String? osm;
 
   Properties({
     required this.xid,
     required this.name,
     required this.dist,
     required this.rate,
-    required this.osm,
+    required this.wikidata,
     required this.kinds,
-    this.wikidata,
+    this.osm,
   });
 
   factory Properties.fromJson(Map<String, dynamic> json) => Properties(
@@ -107,9 +107,9 @@ class Properties {
         name: json["name"],
         dist: json["dist"]?.toDouble(),
         rate: json["rate"],
-        osm: json["osm"],
-        kinds: json["kinds"],
         wikidata: json["wikidata"],
+        kinds: json["kinds"],
+        osm: json["osm"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -117,9 +117,9 @@ class Properties {
         "name": name,
         "dist": dist,
         "rate": rate,
-        "osm": osm,
-        "kinds": kinds,
         "wikidata": wikidata,
+        "kinds": kinds,
+        "osm": osm,
       };
 }
 

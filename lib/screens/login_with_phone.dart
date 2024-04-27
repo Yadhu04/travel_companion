@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:intl_phone_field/intl_phone_field.dart';
+// import 'package:intl_phone_field/intl_phone_field.dart';
 
 class PhoneLogin extends StatefulWidget {
   const PhoneLogin({super.key});
@@ -32,19 +32,19 @@ class _PhoneLoginState extends State<PhoneLogin> {
                 const SizedBox(
                   height: 40,
                 ),
-                SizedBox(
-                  width: 350,
-                  child: IntlPhoneField(
-                    controller: phoneController,
-                    decoration: InputDecoration(
-                        enabledBorder: const OutlineInputBorder(
-                            borderSide: BorderSide(color: Colors.white),
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(20))),
-                        border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(20))),
-                  ),
-                ),
+                // SizedBox(
+                //   width: 350,
+                //   child: IntlPhoneField(
+                //     controller: phoneController,
+                //     decoration: InputDecoration(
+                //         enabledBorder: const OutlineInputBorder(
+                //             borderSide: BorderSide(color: Colors.white),
+                //             borderRadius:
+                //                 BorderRadius.all(Radius.circular(20))),
+                //         border: OutlineInputBorder(
+                //             borderRadius: BorderRadius.circular(20))),
+                //   ),
+                // ),
                 const SizedBox(
                   height: 20,
                 ),

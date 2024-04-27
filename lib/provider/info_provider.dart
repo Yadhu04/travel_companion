@@ -4,7 +4,7 @@ import 'package:travel_companion/screens/itinary.dart';
 class InfoProvider extends ChangeNotifier {
   final PageController pageController = PageController();
   var pageCount = 1;
-  double stepValue = 0.2;
+  double stepValue = 0.25;
   int tripDuration = 0;
   DateTime? temp;
   List intrest = [];
@@ -15,12 +15,15 @@ class InfoProvider extends ChangeNotifier {
     pageController.animateToPage(pageCount,
         duration: const Duration(milliseconds: 5), curve: Curves.linear);
     pageCount++;
-    stepValue = stepValue + 0.2;
+    stepValue = stepValue + 0.25;
     notifyListeners();
+    print("page $pageCount");
+  }
 
-    if (pageCount == 6) {
+  itinaryPage(BuildContext context) {
+    if (pageCount == 4) {
       pageCount = 1;
-      stepValue = 0.2;
+      stepValue = 0.25;
       notifyListeners();
       Navigator.pushReplacement(
           context,
@@ -69,10 +72,19 @@ class InfoProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  bool isSelected = false;
-  void toogleSwitch() {
-    isSelected = !isSelected;
+  List<bool> isSelected = List.generate(5, (index) => false);
+  // bool isSelected = false;
+  void toogleSwitch(int index, String interestsValue) {
+    isSelected[index] = !isSelected[index];
+    if (isSelected[index] == true) {
+      intrest.add(interestsValue);
+    }
+    if (isSelected[index] == false) {
+      intrest.remove(interestsValue);
+    }
+
     print(intrest);
+
     notifyListeners();
   }
 }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:travel_companion/components/info_collector.dart';
 import 'package:travel_companion/provider/info_provider.dart';
+import 'package:travel_companion/provider/location_provider.dart';
 
 class InformationPage extends StatelessWidget {
   const InformationPage({super.key});
@@ -12,6 +13,8 @@ class InformationPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var details = Provider.of<InfoProvider>(context, listen: false);
+
+    var location = Provider.of<LocationProvider>(context, listen: false);
     return Scaffold(
         body: SafeArea(
       child: Consumer<InfoProvider>(
@@ -34,7 +37,7 @@ class InformationPage extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
                       Text(
-                        'Step ${details.pageCount}/5',
+                        'Step ${details.pageCount}/4',
                         style: const TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
@@ -70,20 +73,36 @@ class InformationPage extends StatelessWidget {
             const SizedBox(
               height: 10,
             ),
-            ElevatedButton(
-                onPressed: () {
-                  details.nextPage(context);
-                },
-                style: const ButtonStyle(
-                    // minimumSize: MaterialStatePropertyAll(),
-                    backgroundColor: MaterialStatePropertyAll(Colors.blue)),
-                child: const Text(
-                  'Next',
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20),
-                ))
+            details.pageCount == 4
+                ? ElevatedButton(
+                    onPressed: () {
+                      location.fetchdata();
+                      details.itinaryPage(context);
+                    },
+                    style: const ButtonStyle(
+                        // minimumSize: MaterialStatePropertyAll(),
+                        backgroundColor: MaterialStatePropertyAll(Colors.blue)),
+                    child: const Text(
+                      'Create a Travel Plan',
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20),
+                    ))
+                : ElevatedButton(
+                    onPressed: () {
+                      details.nextPage(context);
+                    },
+                    style: const ButtonStyle(
+                        // minimumSize: MaterialStatePropertyAll(),
+                        backgroundColor: MaterialStatePropertyAll(Colors.blue)),
+                    child: const Text(
+                      'Next',
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20),
+                    ))
           ],
         ),
       ),

@@ -11,7 +11,6 @@ class TripPage extends StatefulWidget {
 }
 
 class _TripPageState extends State<TripPage> {
-  TextEditingController destinationController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     var dataModel = Provider.of<LocationProvider>(context);
@@ -48,7 +47,7 @@ class _TripPageState extends State<TripPage> {
                               SizedBox(
                                 width: 350,
                                 child: TextField(
-                                  controller: destinationController,
+                                  controller: dataModel.destinationController,
                                   textInputAction: TextInputAction.search,
                                   decoration: const InputDecoration(
                                       hintText: 'search destination',
@@ -59,7 +58,8 @@ class _TripPageState extends State<TripPage> {
                               IconButton(
                                   onPressed: () {
                                     dataModel.fetchLocation(
-                                        location: destinationController.text);
+                                        location: dataModel
+                                            .destinationController.text);
                                     print("hiii");
                                     Navigator.push(
                                         context,

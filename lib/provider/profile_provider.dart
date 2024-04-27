@@ -1,15 +1,31 @@
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:travel_companion/screens/home_page.dart';
 
 class ProfileProvider extends ChangeNotifier {
+  TextEditingController emailController = TextEditingController();
+
+  TextEditingController usernameController = TextEditingController();
+
+  TextEditingController passwordController = TextEditingController();
+
+  TextEditingController ageController = TextEditingController();
+
+  final FirebaseFirestore firestore = FirebaseFirestore.instance;
+
   File? imageFile;
   String? imageurl;
   String? currentPic;
   CollectionReference users = FirebaseFirestore.instance.collection('profile');
+  Map<String, dynamic> data = {
+    'name': 'John Doe',
+    'profile': 'New York',
+  };
 
 // function for add image from storage
   Future<void> getImage() async {
@@ -82,5 +98,19 @@ class ProfileProvider extends ChangeNotifier {
       print('Error getting profile picture: $e');
       return null;
     }
+  }
+
+  CreateUser(String email, String password, BuildContext context) async {
+    await FirebaseAuth.instance
+        .createUserWithEmailAndPassword(email: email, password: password);
+
+    CollectionReference collectionRef = firestore.collection(email);
+    DocumentReference docRef = collectionRef.doc('profile');
+    await docRef.set(data);
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => const HomePage(),
+        ));
   }
 }
